@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElJournalCMD", "ElJournalCMD\ElJournalCMD.csproj", "{4229193A-E200-4FE6-BDF3-AD5BDAA84299}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElJournalLib", "ElJournalLib\ElJournalLib.csproj", "{24BDB203-B11A-4CEF-973A-CE7DAC2030E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4229193A-E200-4FE6-BDF3-AD5BDAA84299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4229193A-E200-4FE6-BDF3-AD5BDAA84299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4229193A-E200-4FE6-BDF3-AD5BDAA84299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4229193A-E200-4FE6-BDF3-AD5BDAA84299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24BDB203-B11A-4CEF-973A-CE7DAC2030E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24BDB203-B11A-4CEF-973A-CE7DAC2030E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24BDB203-B11A-4CEF-973A-CE7DAC2030E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24BDB203-B11A-4CEF-973A-CE7DAC2030E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11B83542-9A5E-486B-8E15-0C507A1E1231}
+	EndGlobalSection
+EndGlobal
