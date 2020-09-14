@@ -1,6 +1,7 @@
 ﻿using ElJournal.Controllers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,16 @@ namespace ElJournalCMD
                 Console.Clear();
                 Console.WriteLine("\t Имеющиеся группы:");
                 Console.WriteLine("------------------------------------------------");
-                //Directory d -= new Direc
+                var currentDirectory = Directory.GetCurrentDirectory();
+                Console.WriteLine(Directory.GetCurrentDirectory());
+                //Console.WriteLine(Directory.GetCurrentDirectory() + "\\Data\\" + "6A" + ".dat");
+                var d = Directory.GetFiles(currentDirectory+"\\Data");
+                foreach(var s in d.Where(k=>k.EndsWith(".dat".ToLower())))
+                {
+                    var name = s.Split('\\').LastOrDefault();
+                    name = name.Remove(name.Length - 4);
+                    Console.WriteLine(name);
+                }
                 Console.WriteLine("------------------------------------------------");
                 Console.WriteLine("\t Загружаем имеющуюся группу? (1)");
                 Console.WriteLine("\t Создаем новую группу? (2)");

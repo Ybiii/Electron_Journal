@@ -38,7 +38,7 @@ namespace ElJournal.Controllers
             // создаем объект BinaryFormatter
             BinaryFormatter formatter = new BinaryFormatter();
             // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream("groups_" + group.Name + ".dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\Data\\" + group.Name + ".dat", FileMode.OpenOrCreate))
             {
                 formatter.Serialize(fs, group);
             }
@@ -48,7 +48,7 @@ namespace ElJournal.Controllers
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
-            using (FileStream fs = new FileStream("groups_" + name + ".dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\Data\\" + name + ".dat", FileMode.OpenOrCreate))
             {
                 if (fs.Length != 0)
                 {
