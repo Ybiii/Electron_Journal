@@ -5,35 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using ElJournalLib.Models;
 
 namespace ElJournal.Controllers
 {
     public class GroupController
     {
-        private Group group;
+        public Group Group { get; set; }
+        public Subject Subject { get; set; }
 
         public GroupController()
         {
-            group = new Group();
+
         }
 
-        public GroupController(string name)
+        public GroupController(string groupName)
         {
-            group = new Group(name);
-            Save(group);
+            Group group = new Group(groupName);
+            GroupSave(group);
         }
 
-        public Group GroupLoad(string name)
-        {
-            return Load(name);
-        }
-
-        //public void GroupSave(string name)
-        //{
-
-        //}
-
-        private void Save(Group group)
+        private void GroupSave(Group group)
         {
             // создаем объект BinaryFormatter
             BinaryFormatter formatter = new BinaryFormatter();
@@ -44,7 +36,7 @@ namespace ElJournal.Controllers
             }
         }
 
-        private Group Load(string name)
+        public Group GroupLoad(string name)
         {
             BinaryFormatter formatter = new BinaryFormatter();
 

@@ -44,6 +44,8 @@ namespace ElJournalCMD
                         g = new GroupController(Console.ReadLine());
                         break;
                 }
+
+
             }
         }
     }
