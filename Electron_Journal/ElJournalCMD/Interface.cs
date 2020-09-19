@@ -1,10 +1,6 @@
-﻿using ElJournal.Controllers;
+﻿using ElJournal;
+using ElJournal.Controllers;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElJournalCMD
 {
@@ -15,29 +11,28 @@ namespace ElJournalCMD
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("\t Имеющиеся группы:");
-                Console.WriteLine("------------------------------------------------");
-                var currentDirectory = Directory.GetCurrentDirectory();
-                Console.WriteLine(Directory.GetCurrentDirectory());
-                //Console.WriteLine(Directory.GetCurrentDirectory() + "\\Data\\" + "6A" + ".dat");
-                var d = Directory.GetFiles(currentDirectory+"\\Data");
-                foreach(var s in d.Where(k=>k.EndsWith(".dat".ToLower())))
-                {
-                    var name = s.Split('\\').LastOrDefault();
-                    name = name.Remove(name.Length - 4);
-                    Console.WriteLine(name);
-                }
-                Console.WriteLine("------------------------------------------------");
-                Console.WriteLine("\t Загружаем имеющуюся группу? (1)");
-                Console.WriteLine("\t Создаем новую группу? (2)");
-                int choise;
                 GroupController g = new GroupController();
+                Console.WriteLine("\t Имеющиеся группы");
+                Console.WriteLine("---------------------------------------");
+                foreach (var gr in g.Groups)
+                {
+                    Console.WriteLine(gr.Name);
+                }
+                Console.WriteLine("---------------------------------------");
+                Console.WriteLine("\t Используем имеющуюся группу? (1)");
+                Console.WriteLine("\t Создаем новую группу? (2)");
+                int choise;              
                 Int32.TryParse(Console.ReadLine(), out choise);
                 switch (choise)
                 {
                     case 1:
-                        Console.WriteLine("Вводи название загружаемой группы? ");
-                        g.GroupLoad(Console.ReadLine());
+                        Console.WriteLine("Вводи название группы? ");
+                        GroupController gController = new GroupController(Console.ReadLine());
+                        //Если выбрали группу то работаем с ней иначе начинаем с начала
+                        if (gController.CurrentGroup != null)
+                            EditGroup(gController.CurrentGroup);
+                        else
+                            continue;
                         break;
                     case 2:
                         Console.WriteLine("Вводи имя группы которую создаем?");
@@ -47,6 +42,12 @@ namespace ElJournalCMD
 
 
             }
+        }
+
+        public static void EditGroup(Group g)
+        {
+            Console.WriteLine(g.Name);
+            Console.ReadKey();
         }
     }
 }

@@ -11,50 +11,65 @@ namespace ElJournal.Controllers
 {
     public class GroupController
     {
-        public Group Group { get; set; }
+        public List<Group> Groups { get; set; }
+        public Group CurrentGroup { get; set; }
         public Subject Subject { get; set; }
 
         public GroupController()
         {
-
+            Groups = GroupsLoad();
         }
 
-        public GroupController(string groupName)
+        public GroupController(string groupName) : this()
         {
-            Group group = new Group(groupName);
-            GroupSave(group);
-        }
-
-        private void GroupSave(Group group)
-        {
-            // создаем объект BinaryFormatter
-            BinaryFormatter formatter = new BinaryFormatter();
-            // получаем поток, куда будем записывать сериализованный объект
-            using (FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\Data\\" + group.Name + ".dat", FileMode.OpenOrCreate))
+            if (string.IsNullOrWhiteSpace(groupName))
             {
-                formatter.Serialize(fs, group);
+                throw new ArgumentNullException("Имя группы не может быть пустым", nameof(groupName));
+            }
+
+            CurrentGroup = Groups.SingleOrDefault(n => n.Name == groupName);
+            if (CurrentGroup == null)
+            {
+                Groups.Add(new Group(groupName));
+                GroupsSave(Groups);
+            }
+            else
+            {
+                //если такая группа есть то ничего не делаем
+                return;
             }
         }
 
-        public Group GroupLoad(string name)
+        public void EditGroup()
+        {
+
+        }
+
+        private void GroupsSave(List<Group> groups)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\Data\\groups.dat", FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, groups);
+            }
+        }
+
+        public List<Group> GroupsLoad()
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
-            using (FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\Data\\" + name + ".dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Directory.GetCurrentDirectory() + "\\Data\\groups.dat", FileMode.OpenOrCreate))
             {
                 if (fs.Length != 0)
                 {
-                    Group group = (Group)formatter.Deserialize(fs);
-                    //Group[] deserilizePeople = (Group[])formatter.Deserialize(fs);
-                    //foreach (Group g in deserilizePeople)
+                    List<Group> groups = (List<Group>)formatter.Deserialize(fs);
                     {
-                        Console.WriteLine($"Имя: {group.Name}");
-                        return group;
+                        return groups;
                     }
                 }
                 else
                 {
-                    throw new Exception("Поток десиреализации пустой");
+                    return new List<Group>();
                 }
             }
         }
